@@ -81,9 +81,11 @@ import { AgentHostAuthenticationService, IAgentHostAuthenticationService } from 
 import { updateAgentHostTelemetryLevelFromConfig } from './agentHostTelemetryService.js';
 import { AgentHostEditTelemetryEnabledConfigKey, AgentHostMigrateLegacyCopilotCliEnabledConfigKey, platformRootSchema } from '../common/agentHostSchema.js';
 import { AgentHostOctoKitService, IAgentHostOctoKitService } from './shared/agentHostOctoKitService.js';
+import { AgentHostGitHubService, IAgentHostGitHubService } from './shared/agentHostGitHubService.js';
 import { GitHubCredentialService, IGitHubCredentialService } from './shared/githubCredentialService.js';
 import { GitHubHostCapabilitiesService, IGitHubHostCapabilitiesService } from './shared/githubHostCapabilitiesService.js';
 import { GitHubTransport, IGitHubTransport } from './shared/githubTransport.js';
+import { GitHubQueryService, IGitHubQueryService } from './shared/githubQueryService.js';
 import { IPullRequestQueryService, PullRequestQueryService } from './shared/pullRequestQueryService.js';
 import { IPullRequestMutationService, PullRequestMutationService } from './shared/pullRequestMutationService.js';
 import { IPullRequestResourceService, PullRequestResourceService } from './shared/pullRequestResourceService.js';
@@ -521,6 +523,10 @@ export class AgentService extends Disposable implements IAgentService {
 		services.set(IPullRequestResourceService, pullRequestResourceService);
 		const pullRequestMutationService = this._register(instantiationService.createInstance(PullRequestMutationService, undefined));
 		services.set(IPullRequestMutationService, pullRequestMutationService);
+		const gitHubQueryService = this._register(instantiationService.createInstance(GitHubQueryService, undefined, undefined));
+		services.set(IGitHubQueryService, gitHubQueryService);
+		const agentHostGitHubService = instantiationService.createInstance(AgentHostGitHubService);
+		services.set(IAgentHostGitHubService, agentHostGitHubService);
 		const agentHostOctoKitService = instantiationService.createInstance(AgentHostOctoKitService);
 		services.set(IAgentHostOctoKitService, agentHostOctoKitService);
 		const effectiveCopilotApiService = copilotApiService ?? instantiationService.createInstance(CopilotApiService, fetchFn);
