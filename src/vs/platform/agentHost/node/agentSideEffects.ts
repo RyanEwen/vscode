@@ -76,7 +76,7 @@ import { IAgentConfigurationService } from './agentConfigurationService.js';
 import { AgentHostLocalCommands } from './localCommands/localChatCommand.js';
 import './localCommands/localChatCommands.contribution.js';
 import { SessionPermissionManager } from './sessionPermissions.js';
-import type { IAgentHostOctoKitService } from './shared/agentHostOctoKitService.js';
+import type { IAgentHostOctoKitService } from './shared/github/agentHostOctoKitService.js';
 import type { ICopilotApiService } from './shared/copilotApiService.js';
 import { stripProxyErrorMarker, toChatErrorMeta, tryParseForwardedChatError } from './shared/proxyChatError.js';
 import { persistSessionMetadata } from './shared/persistSessionMetadata.js';

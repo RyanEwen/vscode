@@ -938,7 +938,7 @@
 				"percentage": 60.4
 			}
 		},
-		"src/vs/platform/agentHost/common/githubEndpoints.ts": {
+		"src/vs/platform/agentHost/common/github/githubEndpoints.ts": {
 			"statements": {
 				"covered": 100,
 				"total": 130,
@@ -960,7 +960,7 @@
 				"percentage": 76.92
 			}
 		},
-		"src/vs/platform/agentHost/common/githubIssueReferences.ts": {
+		"src/vs/platform/agentHost/common/github/githubIssueReferences.ts": {
 			"statements": {
 				"covered": 55,
 				"total": 74,
@@ -6064,7 +6064,7 @@
 				"percentage": 94.43
 			}
 		},
-		"src/vs/platform/agentHost/node/shared/agentHostOctoKitService.ts": {
+		"src/vs/platform/agentHost/node/shared/github/agentHostOctoKitService.ts": {
 			"statements": {
 				"covered": 154,
 				"total": 370,
