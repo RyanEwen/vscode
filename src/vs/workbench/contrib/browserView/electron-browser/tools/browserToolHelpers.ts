@@ -165,11 +165,11 @@ export async function playwrightInvoke<TArgs extends unknown[], TReturn>(
 /**
  * Past-tense label for a browser tool call that failed.
  *
- * These tools declare only an `invocationMessage`, so on completion the
- * present-tense label is reused verbatim and a failed call reads as a
- * successful one ("Capturing browser screenshot"). Naming the failure keeps
- * the completed state honest, as the agent host already does for client tool
- * calls and the codex mapper does for its own results.
+ * These tools prepare a success-shaped `pastTenseMessage` before they run
+ * ("Captured browser screenshot"), and `didExecuteTool` keeps it unless the
+ * result carries a message of its own — so a failed call completes wearing the
+ * label of a successful one. Naming the failure overrides it, as the agent host
+ * already does for client tool calls and the codex mapper does for its results.
  */
 const failedMessage = localize('browser.actionFailed', "Browser action failed");
 
@@ -208,7 +208,9 @@ export function invokeFunctionResultToToolResult(result: IInvokeFunctionResult, 
 export function errorResult(message: string): IToolResult {
 	return {
 		content: [{ kind: 'text', value: message }],
-		toolResultError: message,
+		// An empty message still denotes a failure; a falsy `toolResultError`
+		// would be reported to the model as a successful call.
+		toolResultError: message || failedMessage,
 		toolResultMessage: failedMessage,
 	};
 }

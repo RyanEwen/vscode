@@ -39,4 +39,13 @@ suite('browserToolHelpers - failure reporting', () => {
 		assert.strictEqual(result.toolResultError, 'No page ID provided.');
 		assert.ok(result.toolResultMessage);
 	});
+
+	test('errorResult with an empty message still reports a failure', () => {
+		// `throw ''` reaches here as an empty string. A falsy `toolResultError`
+		// is serialised to the model as a successful call.
+		const result = errorResult('');
+
+		assert.ok(result.toolResultError, 'an empty message must not read as success');
+		assert.ok(result.toolResultMessage);
+	});
 });
